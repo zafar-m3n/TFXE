@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <div className="min-h-40 relative w-full flex flex-col items-center justify-center overflow-hidden border-t border-gray-300 mt-4 md:mt-6 lg:mt-8">
+    <div className="min-h-40 relative w-full flex flex-col items-center justify-center overflow-hidden border-t border-gray-300">
       <footer className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           <div className="flex flex-col items-start justify-between space-y-4">
@@ -29,7 +29,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="text-left">
+          <div className="text-left md:pt-9">
             <h3 className="text-lg font-bold text-accent mb-6 underline underline-offset-8">Contact Us</h3>
             <div className="flex flex-col space-y-6">
               <div className="flex items-center">
@@ -56,7 +56,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="text-left">
+          <div className="text-left md:pt-9">
             <h3 className="text-lg font-bold text-accent mb-6 underline underline-offset-8">Useful Links</h3>
             <ul className="space-y-2">
               <li>

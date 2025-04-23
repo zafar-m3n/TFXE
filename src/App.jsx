@@ -5,6 +5,13 @@ import HomePage from "@/pages/home";
 import AboutUs from "@/pages/about";
 import ContactUs from "@/pages/contact";
 import NotFound from "@/pages/NotFound";
+import Cryptocurrencies from "@/pages/markets/Cryptocurrencies";
+import Indices from "@/pages/markets/Indices";
+import Forex from "@/pages/markets/Forex";
+import Stocks from "@/pages/markets/Stocks";
+import Commodities from "@/pages/markets/Commodities";
+import MarketNews from "@/pages/learn/MarketNews";
+import TradingBasics from "@/pages/learn/TradingBasics";
 
 const App = () => {
   return (
@@ -13,6 +20,15 @@ const App = () => {
         <Route element={<DefaultLayout />}>
           <Route path="/home" element={<Navigate to="/" replace />} />
           <Route path="/" element={<HomePage />} />
+          <Route path="/markets">
+            <Route path="commodities" element={<Commodities />} />
+            <Route path="forex" element={<Forex />} />
+            <Route path="stocks" element={<Stocks />} />
+            <Route path="cryptocurrencies" element={<Cryptocurrencies />} />
+            <Route path="indices" element={<Indices />} />
+          </Route>
+          <Route path="/learn/trading-basics" element={<TradingBasics />} />
+          <Route path="/learn/market-news" element={<MarketNews />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="*" element={<NotFound />} />
