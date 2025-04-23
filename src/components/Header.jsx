@@ -5,14 +5,14 @@ import logo from "@/assets/logo.png";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [openSubMenu, setOpenSubMenu] = useState(""); // for mobile submenu toggle
+  const [openSubMenu, setOpenSubMenu] = useState("");
   const location = useLocation();
 
   const menuItems = [
     { label: "Home", link: "/" },
     {
       label: "Markets",
-      subLinks: ["/markets/stocks", "/markets/forex", "/markets/commodities", "/markets/crypto", "/markets/indices"],
+      subLinks: ["/markets/stocks", "/markets/forex", "/markets/commodities", "/markets/cryptocurrencies", "/markets/indices"],
     },
     {
       label: "Learn",
@@ -54,7 +54,7 @@ const Header = () => {
                     <Link
                       key={sub}
                       to={sub}
-                      className={`block px-4 py-2 hover:text-orange-500 hover:bg-white/10 ${
+                      className={`block px-4 py-2 capitalize hover:text-orange-500 hover:bg-white/10 ${
                         isActive(sub) ? "text-orange-500" : "text-black"
                       }`}
                     >
@@ -132,7 +132,9 @@ const Header = () => {
                       setIsOpen(false);
                       setOpenSubMenu("");
                     }}
-                    className={`block py-1 hover:text-orange-500 ${isActive(sub) ? "text-orange-500" : "text-black"}`}
+                    className={`block py-1 capitalize hover:text-orange-500 ${
+                      isActive(sub) ? "text-orange-500" : "text-black"
+                    }`}
                   >
                     {sub
                       .split("/")
