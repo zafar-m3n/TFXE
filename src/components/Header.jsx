@@ -5,6 +5,7 @@ import logo from "@/assets/logo.png";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [openSubMenu, setOpenSubMenu] = useState(""); // for mobile submenu toggle
   const location = useLocation();
 
   const menuItems = [
@@ -25,7 +26,8 @@ const Header = () => {
 
   return (
     <nav className="w-full">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between border-b border-gray-300 md:border-0">
+        {/* Logo */}
         <Link to="/" className="flex items-center">
           <img src={logo} alt="TFXE Logo" className="h-20 w-auto" />
         </Link>
@@ -34,8 +36,11 @@ const Header = () => {
         <div className="hidden lg:flex flex-1 items-center justify-center space-x-8 text-black font-medium">
           {menuItems.map((item) =>
             item.subLinks ? (
-              <div key={item.label} className="relative group">
-                <span className="cursor-pointer hover:text-orange-500">{item.label}</span>
+              <div key={item.label} className="relative group flex items-center gap-1">
+                <span className="cursor-pointer hover:text-orange-500 flex items-center gap-1">
+                  {item.label}
+                  <Icon icon="heroicons:chevron-down" width={16} />
+                </span>
                 <div
                   className={`
                     absolute left-0 top-full mt-2 py-2 rounded z-50 min-w-[160px]
@@ -76,21 +81,14 @@ const Header = () => {
 
         {/* Social Icons */}
         <div className="hidden lg:flex items-center space-x-3">
-          <Icon
-            icon="mdi:twitter"
-            width={36}
-            className="p-2 rounded bg-orange-500 text-white hover:p-1 transition-all duration-300"
-          />
-          <Icon
-            icon="mdi:facebook"
-            width={36}
-            className="p-2 rounded bg-orange-500 text-white hover:p-1 transition-all duration-300"
-          />
-          <Icon
-            icon="mdi:linkedin"
-            width={36}
-            className="p-2 rounded bg-orange-500 text-white hover:p-1 transition-all duration-300"
-          />
+          {["twitter", "facebook", "linkedin"].map((icon) => (
+            <Icon
+              key={icon}
+              icon={`mdi:${icon}`}
+              width={36}
+              className="p-2 rounded bg-orange-500 text-white hover:p-1 transition-all duration-300"
+            />
+          ))}
         </div>
 
         {/* Mobile Toggle */}
@@ -110,14 +108,31 @@ const Header = () => {
         {menuItems.map((item) =>
           item.subLinks ? (
             <div key={item.label}>
-              <p className="text-black font-semibold">{item.label}</p>
-              <div className="ml-4 space-y-1">
+              <div
+                onClick={() => setOpenSubMenu(openSubMenu === item.label ? "" : item.label)}
+                className="flex justify-between items-center text-black font-semibold cursor-pointer"
+              >
+                <span>{item.label}</span>
+                <Icon
+                  icon="heroicons:chevron-down"
+                  width="20"
+                  className={`transition-transform duration-300 ${openSubMenu === item.label ? "rotate-180" : ""}`}
+                />
+              </div>
+              <div
+                className={`ml-4 overflow-hidden transition-all duration-300 ease-in-out ${
+                  openSubMenu === item.label ? "max-h-96 opacity-100 visible mt-1" : "max-h-0 opacity-0 invisible"
+                }`}
+              >
                 {item.subLinks.map((sub) => (
                   <Link
                     key={sub}
                     to={sub}
-                    onClick={() => setIsOpen(false)}
-                    className={`block hover:text-orange-500 ${isActive(sub) ? "text-orange-500" : "text-black"}`}
+                    onClick={() => {
+                      setIsOpen(false);
+                      setOpenSubMenu("");
+                    }}
+                    className={`block py-1 hover:text-orange-500 ${isActive(sub) ? "text-orange-500" : "text-black"}`}
                   >
                     {sub
                       .split("/")
@@ -142,21 +157,14 @@ const Header = () => {
 
         {/* Social Icons in Mobile */}
         <div className="flex space-x-3 mt-2">
-          <Icon
-            icon="mdi:twitter"
-            width={36}
-            className="p-2 rounded bg-orange-500 text-white hover:p-1 transition-all duration-300"
-          />
-          <Icon
-            icon="mdi:facebook"
-            width={36}
-            className="p-2 rounded bg-orange-500 text-white hover:p-1 transition-all duration-300"
-          />
-          <Icon
-            icon="mdi:linkedin"
-            width={36}
-            className="p-2 rounded bg-orange-500 text-white hover:p-1 transition-all duration-300"
-          />
+          {["twitter", "facebook", "linkedin"].map((icon) => (
+            <Icon
+              key={icon}
+              icon={`mdi:${icon}`}
+              width={36}
+              className="p-2 rounded bg-orange-500 text-white hover:p-1 transition-all duration-300"
+            />
+          ))}
         </div>
       </div>
     </nav>
