@@ -12,6 +12,7 @@ const Button = ({
   icon = null,
   iconPosition = "left",
   type = "button",
+  className = "",
 }) => {
   // Tailwind size classes
   const sizeClasses = {
@@ -21,7 +22,7 @@ const Button = ({
   };
 
   const colorClasses = {
-    primary: "bg-blue-500 text-white border-blue-500 hover:bg-blue-600 hover:border-blue-600",
+    primary: "bg-accent text-white border-accent hover:bg-orange-600 hover:border-orange-600",
     success: "bg-green-500 text-white border-green-500 hover:bg-green-600 hover:border-green-600",
     warning: "bg-yellow-500 text-white border-yellow-500 hover:bg-yellow-600 hover:border-yellow-600",
     danger: "bg-red-500 text-white border-red-500 hover:bg-red-600 hover:border-red-600",
@@ -31,7 +32,7 @@ const Button = ({
   };
 
   const outlineClasses = {
-    primary: "text-blue-500 border-blue-500 hover:bg-blue-50",
+    primary: "text-accent border-accent hover:bg-orange-50",
     success: "text-green-500 border-green-500 hover:bg-green-50",
     warning: "text-yellow-500 border-yellow-500 hover:bg-yellow-50",
     danger: "text-red-500 border-red-500 hover:bg-red-50",
@@ -45,7 +46,7 @@ const Button = ({
       type={type}
       disabled={disabled || loading}
       onClick={onClick}
-      className={`inline-flex items-center justify-center border font-medium rounded-md transition duration-300 ${
+      className={`${className} inline-flex items-center justify-center border font-medium rounded-md transition duration-300 ${
         variant === "outline" ? outlineClasses[color] : colorClasses[color]
       } ${sizeClasses[size]} ${
         disabled
