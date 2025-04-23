@@ -36,7 +36,7 @@ const Modal = ({
           leaveTo="opacity-0"
         >
           <div
-            className={`fixed inset-0 bg-black bg-opacity-50 ${overlayClass}`}
+            className={`fixed inset-0 bg-black/50 ${overlayClass}`}
             onClick={closeOnOverlayClick ? onClose : null}
           />
         </Transition.Child>
