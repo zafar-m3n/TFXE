@@ -70,13 +70,13 @@ const Button = ({
           ></path>
         </svg>
       )}
-      {icon && iconPosition === "left" && (
+      {!loading && icon && iconPosition === "left" && (
         <span className="me-2">
           <Icon icon={icon} />
         </span>
       )}
-      {children && <span>{children}</span>}
-      {icon && iconPosition === "right" && (
+      {!loading && children && <span>{children}</span>}
+      {!loading && icon && iconPosition === "right" && (
         <span className="ms-2">
           <Icon icon={icon} />
         </span>

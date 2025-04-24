@@ -1,11 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import Icon from "@/components/ui/Icon";
 import Button from "@/components/ui/Button";
 import AnimatedContent from "@/components/ui/AnimatedContent";
 
 const ContactSection = () => {
+  const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+
+    const formData = new FormData(form);
+    setLoading((prev) => true);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setStatus("Thanks! Your message has been sent.");
+        form.reset();
+      } else {
+        setStatus("Oops! Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      setStatus("Something went wrong. Please try again.");
+    }
+
+    setLoading((prev) => false);
+  };
+
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white overflow-x-hidden">
       <AnimatedContent
         distance={100}
         direction="horizontal"
@@ -24,31 +55,47 @@ const ContactSection = () => {
               our expert team
             </h2>
 
-            <form className="space-y-6">
+            {status && <div className="text-sm text-green-600 font-medium mb-4">{status}</div>}
+
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              {/* Hidden Inputs for Web3Forms */}
+              <input type="hidden" name="access_key" value="383e7158-d9a8-4061-9b2c-2fa04eb053aa" />
+              <input type="hidden" name="subject" value="New Lead from TFXE" />
+              <input type="hidden" name="from_name" value="tfxe.live" />
+              <input type="checkbox" name="botcheck" className="hidden" style={{ display: "none" }} />
+
               <input
                 type="text"
+                name="name"
                 placeholder="Full Name"
+                required
                 className="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
               <div className="flex flex-col md:flex-row gap-4">
                 <input
                   type="email"
+                  name="email"
                   placeholder="Email*"
+                  required
                   className="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
                 <input
                   type="tel"
+                  name="phone"
                   placeholder="Phone"
+                  required
                   className="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
               </div>
               <textarea
+                name="message"
                 rows="5"
+                required
                 placeholder="Please describe what you need. *"
                 className="w-full border border-gray-300 rounded px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
               ></textarea>
 
-              <Button color="primary" size="md" className="mx-auto w-fit md:mx-0">
+              <Button type="submit" color="primary" size="md" className="mx-auto w-fit md:mx-0" loading={loading}>
                 Send Now
               </Button>
             </form>

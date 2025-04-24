@@ -72,8 +72,8 @@ const HeroSection = () => {
 
           <form className="space-y-4" onSubmit={handleSubmit}>
             <input type="hidden" name="access_key" value="383e7158-d9a8-4061-9b2c-2fa04eb053aa" />
-            <input type="hidden" name="subject" value="New Submission from Hero Section" />
-            <input type="hidden" name="from_name" value="TFXE Hero Form" />
+            <input type="hidden" name="subject" value="New Lead from TFXE" />
+            <input type="hidden" name="from_name" value="tfxe.live" />
             <input type="checkbox" name="botcheck" className="hidden" style={{ display: "none" }} />
 
             <input
