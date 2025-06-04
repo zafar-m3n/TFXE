@@ -12,6 +12,8 @@ import Stocks from "@/pages/markets/Stocks";
 import Commodities from "@/pages/markets/Commodities";
 import MarketNews from "@/pages/learn/MarketNews";
 import TradingBasics from "@/pages/learn/TradingBasics";
+import Terms from "@/pages/legal/Terms";
+import PrivacyPolicy from "@/pages/legal/PrivacyPolicy";
 
 const App = () => {
   return (
@@ -31,6 +33,8 @@ const App = () => {
           <Route path="/learn/market-news" element={<MarketNews />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
